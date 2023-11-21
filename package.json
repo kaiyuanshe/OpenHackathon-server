@@ -1,0 +1,54 @@
+{
+  "name": "strapi-pnpm-docker-ts",
+  "version": "0.4.0",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0 <=20.x.x",
+    "npm": ">=6.0.0"
+  },
+  "dependencies": {
+    "@ckeditor/strapi-plugin-ckeditor": "^0.0.10",
+    "@strapi/plugin-color-picker": "^4.15.4",
+    "@strapi/plugin-documentation": "4.15.4",
+    "@strapi/plugin-i18n": "4.15.4",
+    "@strapi/plugin-users-permissions": "4.15.4",
+    "@strapi/strapi": "4.15.4",
+    "better-sqlite3": "9.1.1",
+    "pg": "^8.11.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^5.3.4",
+    "strapi-content-type-explorer": "^0.1.1",
+    "strapi-plugin-multi-select": "^1.2.2",
+    "strapi-plugin-react-icons": "^0.2.1",
+    "strapi-plugin-transformer": "^3.1.2",
+    "styled-components": "^5.3.11"
+  },
+  "devDependencies": {
+    "@codemirror/autocomplete": "^6.11.0",
+    "@codemirror/lint": "^6.4.2",
+    "@codemirror/search": "^6.5.4",
+    "@codemirror/theme-one-dark": "^6.1.2",
+    "cross-env": "^7.0.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
+    "prettier": "^3.1.0"
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "lint-staged": {
+    "*.{md,json,yml,js,mjs,ts,tsx}": "prettier --write"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "test": "lint-staged",
+    "strapi": "strapi",
+    "clean": "rm -rf .cache/ .strapi/ dist/",
+    "develop": "npm run clean  &&  strapi build  &&  strapi develop",
+    "build": "npm run clean  &&  cross-env NODE_ENV=production  strapi build",
+    "start": "cross-env NODE_ENV=production  strapi start",
+    "pack-image": "docker build -t strapi-server:latest .",
+    "container": "(docker rm -f strapi-server || true)  &&  docker run --name strapi-server -p 1337:1337 -d strapi-server:latest"
+  }
+}
