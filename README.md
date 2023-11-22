@@ -1,6 +1,8 @@
-# Strapi scaffold with TypeScript, PNPM & Docker
+# Open Hackathon Platform - Web server
 
-Strapi comes with a full featured [Command Line Interface][1] (CLI) which lets you scaffold and manage your project in seconds.
+Open Hackathon Platform server v5 based on [Strapi][6]
+
+[![Deploy to Production environment](https://github.com/kaiyuanshe/OpenHackathon-server/actions/workflows/deploy-production.yml/badge.svg)][1]
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)][2]
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)][3]
@@ -97,9 +99,9 @@ Feel free to check out the [Strapi GitHub repository][27]. Your feedback and con
 
 🤫 Psst! [Strapi is hiring][31].
 
-[1]: https://docs.strapi.io/dev-docs/cli
-[2]: https://codespaces.new/idea2app/Strapi-PNPM-Docker-ts
-[3]: https://gitpod.io/?autostart=true#https://github.com/idea2app/Strapi-PNPM-Docker-ts
+[1]: https://github.com/kaiyuanshe/OpenHackathon-server/actions/workflows/deploy-production.yml
+[2]: https://codespaces.new/kaiyuanshe/OpenHackathon-server
+[3]: https://gitpod.io/?autostart=true#https://github.com/kaiyuanshe/OpenHackathon-server
 [4]: https://www.typescriptlang.org/
 [5]: https://pnpm.io/
 [6]: https://strapi.io/

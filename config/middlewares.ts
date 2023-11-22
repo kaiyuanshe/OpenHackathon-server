@@ -1,6 +1,19 @@
-export default [
+export default ({ env }) => [
   'strapi::errors',
-  'strapi::security',
+  {
+    name: 'strapi::security',
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          'connect-src': ["'self'", 'https:'],
+          'img-src': ["'self'", 'data:', 'blob:', env('AZURE_BLOB_BASE_URL')],
+          'media-src': ["'self'", 'data:', 'blob:', env('AZURE_BLOB_BASE_URL')],
+          upgradeInsecureRequests: null,
+        },
+      },
+    },
+  },
   'strapi::cors',
   'strapi::poweredBy',
   'strapi::logger',

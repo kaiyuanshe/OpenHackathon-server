@@ -1,5 +1,5 @@
 {
-  "name": "strapi-pnpm-docker-ts",
+  "name": "@ohp/web-server",
   "version": "0.4.0",
   "private": true,
   "engines": {
@@ -22,6 +22,7 @@
     "strapi-plugin-multi-select": "^1.2.2",
     "strapi-plugin-react-icons": "^0.2.1",
     "strapi-plugin-transformer": "^3.1.2",
+    "strapi-provider-upload-azure-storage": "^3.3.0",
     "styled-components": "^5.3.11"
   },
   "devDependencies": {
@@ -30,6 +31,7 @@
     "@codemirror/search": "^6.5.4",
     "@codemirror/theme-one-dark": "^6.1.2",
     "cross-env": "^7.0.3",
+    "get-git-folder": "^0.1.2",
     "husky": "^8.0.3",
     "lint-staged": "^15.1.0",
     "prettier": "^3.1.0"
@@ -41,7 +43,8 @@
     "*.{md,json,yml,js,mjs,ts,tsx}": "prettier --write"
   },
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky install  ||  true",
+    "install": "get-git-folder https://github.com/kaiyuanshe/service-configuration main OpenHackathon-server  ||  true",
     "test": "lint-staged",
     "strapi": "strapi",
     "clean": "rm -rf .cache/ .strapi/ dist/",
