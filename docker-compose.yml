@@ -1,22 +1,25 @@
 version: '3'
 
+volumes:
+  ohp-database:
+
 services:
   postgres-server:
     image: postgres
     environment:
       - POSTGRES_PASSWORD=${ADMIN_JWT_SECRET}
     volumes:
-      - ./data:/var/lib/postgresql/data/
+      - ohp-database:/var/lib/postgresql/data/
     ports:
-      - 5432:5432
+      - 5433:5432
     restart: always
 
   strapi-server:
     depends_on:
       - postgres-server
-    image: idea2app/strapi-server
+    image: ohp/strapi-server
     environment:
-      - DATABASE_URL=postgres://postgres:${ADMIN_JWT_SECRET}@postgres-server:5432/postgres
+      - DATABASE_URL=postgres://postgres:${ADMIN_JWT_SECRET}@postgres-server:5433/postgres
       - NODE_ENV=production
       - PORT=1337
     ports:
