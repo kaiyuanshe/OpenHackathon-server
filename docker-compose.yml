@@ -10,8 +10,6 @@ services:
       - POSTGRES_PASSWORD=${ADMIN_JWT_SECRET}
     volumes:
       - ohp-database:/var/lib/postgresql/data/
-    ports:
-      - 5433:5432
     restart: always
 
   strapi-server:
@@ -19,7 +17,8 @@ services:
       - postgres-server
     image: ohp/strapi-server
     environment:
-      - DATABASE_URL=postgres://postgres:${ADMIN_JWT_SECRET}@postgres-server:5433/postgres
+      - DATABASE_CLIENT=postgres
+      - DATABASE_URL=postgres://postgres:${ADMIN_JWT_SECRET}@postgres-server:5432/postgres
       - NODE_ENV=production
       - PORT=1337
     ports:
@@ -32,10 +31,6 @@ services:
     labels:
       - autoheal=true
     restart: always
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
 
   autoheal:
     image: willfarrell/autoheal:1.2.0
