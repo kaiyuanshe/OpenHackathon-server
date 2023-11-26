@@ -9,8 +9,6 @@ services:
       - MYSQL_DATABASE=strapi
     volumes:
       - ./.data:/var/lib/mysql
-    ports:
-      - 3306:3306
     restart: always
 
   strapi-server:
