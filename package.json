@@ -14,7 +14,7 @@
     "@strapi/plugin-users-permissions": "4.15.4",
     "@strapi/strapi": "4.15.4",
     "better-sqlite3": "9.1.1",
-    "pg": "^8.11.3",
+    "mysql2": "^3.6.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
@@ -51,7 +51,7 @@
     "develop": "npm run clean  &&  strapi build  &&  strapi develop",
     "build": "npm run clean  &&  cross-env NODE_ENV=production  strapi build",
     "start": "cross-env NODE_ENV=production  strapi start",
-    "pack-image": "docker build -t strapi-server:latest .",
-    "container": "(docker rm -f strapi-server || true)  &&  docker run --name strapi-server -p 1337:1337 -d strapi-server:latest"
+    "pack-image": "docker build -t ohp/strapi-server:latest .",
+    "container": "docker rm -f strapi-server  &&  docker run --name strapi-server -p 1337:1337 -d ohp/strapi-server:latest"
   }
 }

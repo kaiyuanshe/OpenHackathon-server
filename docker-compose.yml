@@ -1,23 +1,27 @@
 version: '3'
 
 services:
-  postgres-server:
-    image: postgres
+  mysql-server:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
     environment:
-      - POSTGRES_PASSWORD=${ADMIN_JWT_SECRET}
+      - MYSQL_ROOT_PASSWORD=${ADMIN_JWT_SECRET}
+      - MYSQL_DATABASE=strapi
     volumes:
-      - ./data:/var/lib/postgresql/data/
+      - ./.data:/var/lib/mysql
     ports:
-      - 5433:5432
+      - 3306:3306
     restart: always
 
   strapi-server:
     depends_on:
-      - postgres-server
+      - mysql-server
     image: ohp/strapi-server
     environment:
-      - DATABASE_CLIENT=postgres
-      - DATABASE_URL=postgres://postgres:${ADMIN_JWT_SECRET}@postgres-server:5433/postgres
+      - DATABASE_CLIENT=mysql2
+      - DATABASE_HOST=mysql-server
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=${ADMIN_JWT_SECRET}
       - NODE_ENV=production
       - PORT=1337
     ports:
@@ -30,10 +34,6 @@ services:
     labels:
       - autoheal=true
     restart: always
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
 
   autoheal:
     image: willfarrell/autoheal:1.2.0
