@@ -74,6 +74,12 @@
       "relation": "oneToMany",
       "target": "api::enrollment.enrollment",
       "mappedBy": "user"
+    },
+    "teams": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::team.team",
+      "mappedBy": "creator"
     }
   }
 }
