@@ -894,6 +894,12 @@ export interface ApiActivityActivity extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    staffs: Attribute.Component<'business.staff', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

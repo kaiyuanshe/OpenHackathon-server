@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_business_staff",
+  "info": {
+    "displayName": "Staff",
+    "icon": "user"
+  },
+  "options": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["admin", "judge", "member"],
+      "default": "member",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
