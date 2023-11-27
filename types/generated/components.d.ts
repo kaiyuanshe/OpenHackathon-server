@@ -1,5 +1,24 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface BusinessCooperation extends Schema.Component {
+  collectionName: 'components_business_cooperation';
+  info: {
+    displayName: 'Cooperation';
+    icon: 'briefcase';
+  };
+  attributes: {
+    type: Attribute.Enumeration<
+      ['host', 'organizer', 'coorganizer', 'sponsor', 'titleSponsor']
+    > &
+      Attribute.Required;
+    organization: Attribute.Relation<
+      'business.cooperation',
+      'oneToOne',
+      'api::organization.organization'
+    >;
+  };
+}
+
 export interface CommonMultipleText extends Schema.Component {
   collectionName: 'components_common_multiple_texts';
   info: {
@@ -31,6 +50,7 @@ export interface FormField extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'business.cooperation': BusinessCooperation;
       'common.multiple-text': CommonMultipleText;
       'form.field': FormField;
     }
