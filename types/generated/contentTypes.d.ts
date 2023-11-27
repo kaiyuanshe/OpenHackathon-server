@@ -710,6 +710,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToMany',
       'api::enrollment.enrollment'
     >;
+    teams: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::team.team'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -930,6 +935,7 @@ export interface ApiEnrollmentEnrollment extends Schema.CollectionType {
     singularName: 'enrollment';
     pluralName: 'enrollments';
     displayName: 'Enrollment';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -951,6 +957,12 @@ export interface ApiEnrollmentEnrollment extends Schema.CollectionType {
       Attribute.Required &
       Attribute.DefaultTo<'none'>;
     extensions: Attribute.JSON;
+    team: Attribute.Relation<
+      'api::enrollment.enrollment',
+      'manyToOne',
+      'api::team.team'
+    >;
+    approveStage: Attribute.Enumeration<['activity', 'team']>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1169,6 +1181,153 @@ export interface ApiPrizePrize extends Schema.CollectionType {
   };
 }
 
+export interface ApiProductProduct extends Schema.CollectionType {
+  collectionName: 'products';
+  info: {
+    singularName: 'product';
+    pluralName: 'products';
+    displayName: 'Product';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    url: Attribute.String &
+      Attribute.Unique &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    type: Attribute.Enumeration<
+      ['website', 'image', 'video', 'word', 'powerpoint']
+    > &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    team: Attribute.Relation<
+      'api::product.product',
+      'manyToOne',
+      'api::team.team'
+    >;
+    activity: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'api::activity.activity'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::product.product',
+      'oneToMany',
+      'api::product.product'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiTeamTeam extends Schema.CollectionType {
+  collectionName: 'teams';
+  info: {
+    singularName: 'team';
+    pluralName: 'teams';
+    displayName: 'Team';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    displayName: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    creator: Attribute.Relation<
+      'api::team.team',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    enrollments: Attribute.Relation<
+      'api::team.team',
+      'oneToMany',
+      'api::enrollment.enrollment'
+    >;
+    products: Attribute.Relation<
+      'api::team.team',
+      'oneToMany',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::team.team',
+      'oneToMany',
+      'api::team.team'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1191,6 +1350,8 @@ declare module '@strapi/types' {
       'api::message.message': ApiMessageMessage;
       'api::organization.organization': ApiOrganizationOrganization;
       'api::prize.prize': ApiPrizePrize;
+      'api::product.product': ApiProductProduct;
+      'api::team.team': ApiTeamTeam;
     }
   }
 }
