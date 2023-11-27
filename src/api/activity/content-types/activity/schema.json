@@ -180,6 +180,12 @@
       "relation": "oneToMany",
       "target": "api::enrollment.enrollment",
       "mappedBy": "activity"
+    },
+    "questionnaire": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::questionnaire.questionnaire",
+      "mappedBy": "activity"
     }
   }
 }
