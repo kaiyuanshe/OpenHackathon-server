@@ -80,6 +80,12 @@
       "relation": "oneToMany",
       "target": "api::team.team",
       "mappedBy": "creator"
+    },
+    "awards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::award.award",
+      "mappedBy": "user"
     }
   }
 }
