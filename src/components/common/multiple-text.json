@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_common_multiple_texts",
+  "info": {
+    "displayName": "Multiple Text",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "customField",
+      "customField": "plugin::react-icons.icon"
+    }
+  }
+}

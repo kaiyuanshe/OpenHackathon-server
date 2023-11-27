@@ -68,15 +68,15 @@
       "customField": "plugin::ckeditor.CKEditor"
     },
     "banners": {
-      "allowedTypes": ["images", "videos"],
       "type": "media",
       "multiple": true,
+      "required": true,
+      "allowedTypes": ["images", "videos"],
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      },
-      "required": true
+      }
     },
     "status": {
       "pluginOptions": {
@@ -164,6 +164,22 @@
       },
       "type": "datetime",
       "required": true
+    },
+    "gitTemplates": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "component": "common.multiple-text"
+    },
+    "enrollments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::enrollment.enrollment",
+      "mappedBy": "activity"
     }
   }
 }
