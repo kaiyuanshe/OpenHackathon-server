@@ -63,6 +63,12 @@
         }
       },
       "required": true
+    },
+    "awards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::award.award",
+      "mappedBy": "prize"
     }
   }
 }

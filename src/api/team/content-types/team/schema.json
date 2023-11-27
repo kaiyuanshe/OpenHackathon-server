@@ -56,6 +56,12 @@
       "relation": "oneToMany",
       "target": "api::product.product",
       "mappedBy": "team"
+    },
+    "awards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::award.award",
+      "mappedBy": "team"
     }
   }
 }

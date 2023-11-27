@@ -715,6 +715,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToMany',
       'api::team.team'
     >;
+    awards: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::award.award'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -905,6 +910,11 @@ export interface ApiActivityActivity extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    awards: Attribute.Relation<
+      'api::activity.activity',
+      'oneToMany',
+      'api::award.award'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -924,6 +934,68 @@ export interface ApiActivityActivity extends Schema.CollectionType {
       'api::activity.activity',
       'oneToMany',
       'api::activity.activity'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiAwardAward extends Schema.CollectionType {
+  collectionName: 'awards';
+  info: {
+    singularName: 'award';
+    pluralName: 'awards';
+    displayName: 'Award';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    activity: Attribute.Relation<
+      'api::award.award',
+      'manyToOne',
+      'api::activity.activity'
+    >;
+    prize: Attribute.Relation<
+      'api::award.award',
+      'manyToOne',
+      'api::prize.prize'
+    >;
+    user: Attribute.Relation<
+      'api::award.award',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    team: Attribute.Relation<'api::award.award', 'manyToOne', 'api::team.team'>;
+    description: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::award.award',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::award.award',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::award.award',
+      'oneToMany',
+      'api::award.award'
     >;
     locale: Attribute.String;
   };
@@ -1158,6 +1230,11 @@ export interface ApiPrizePrize extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    awards: Attribute.Relation<
+      'api::prize.prize',
+      'oneToMany',
+      'api::award.award'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1313,6 +1390,11 @@ export interface ApiTeamTeam extends Schema.CollectionType {
       'oneToMany',
       'api::product.product'
     >;
+    awards: Attribute.Relation<
+      'api::team.team',
+      'oneToMany',
+      'api::award.award'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
@@ -1346,6 +1428,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::activity.activity': ApiActivityActivity;
+      'api::award.award': ApiAwardAward;
       'api::enrollment.enrollment': ApiEnrollmentEnrollment;
       'api::message.message': ApiMessageMessage;
       'api::organization.organization': ApiOrganizationOrganization;
