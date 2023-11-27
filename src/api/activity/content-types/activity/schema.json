@@ -208,6 +208,17 @@
         }
       },
       "component": "form.field"
+    },
+    "staffs": {
+      "displayName": "Staff",
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "business.staff"
     }
   }
 }

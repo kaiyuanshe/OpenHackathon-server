@@ -19,6 +19,25 @@ export interface BusinessCooperation extends Schema.Component {
   };
 }
 
+export interface BusinessStaff extends Schema.Component {
+  collectionName: 'components_business_staff';
+  info: {
+    displayName: 'Staff';
+    icon: 'user';
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'business.staff',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    type: Attribute.Enumeration<['admin', 'judge', 'member']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'member'>;
+    description: Attribute.String & Attribute.Required;
+  };
+}
+
 export interface CommonMultipleText extends Schema.Component {
   collectionName: 'components_common_multiple_texts';
   info: {
@@ -51,6 +70,7 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'business.cooperation': BusinessCooperation;
+      'business.staff': BusinessStaff;
       'common.multiple-text': CommonMultipleText;
       'form.field': FormField;
     }
