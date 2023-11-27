@@ -186,6 +186,18 @@
       "relation": "oneToOne",
       "target": "api::questionnaire.questionnaire",
       "mappedBy": "activity"
+    },
+    "cooperations": {
+      "displayName": "Cooperation",
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "component": "business.cooperation",
+      "required": true
     }
   }
 }
