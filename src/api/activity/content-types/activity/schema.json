@@ -198,6 +198,12 @@
       },
       "component": "business.cooperation",
       "required": true
+    },
+    "messages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::message.message",
+      "mappedBy": "activity"
     }
   }
 }
