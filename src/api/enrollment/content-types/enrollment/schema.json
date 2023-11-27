@@ -4,7 +4,8 @@
   "info": {
     "singularName": "enrollment",
     "pluralName": "enrollments",
-    "displayName": "Enrollment"
+    "displayName": "Enrollment",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -31,6 +32,16 @@
     },
     "extensions": {
       "type": "json"
+    },
+    "team": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::team.team",
+      "inversedBy": "enrollments"
+    },
+    "approveStage": {
+      "type": "enumeration",
+      "enum": ["activity", "team"]
     }
   }
 }
