@@ -20,7 +20,6 @@ services:
       - DATABASE_CLIENT=postgres
       - DATABASE_URL=postgres://postgres:${ADMIN_JWT_SECRET}@postgres-server:5432/postgres
       - NODE_ENV=production
-      - PORT=1337
     ports:
       - 1337:1337
     healthcheck:
