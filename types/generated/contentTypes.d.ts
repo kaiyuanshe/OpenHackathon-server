@@ -511,6 +511,11 @@ export interface ApiActivityActivity extends Schema.CollectionType {
       'oneToMany',
       'api::enrollment.enrollment'
     >;
+    questionnaire: Attribute.Relation<
+      'api::activity.activity',
+      'oneToOne',
+      'api::questionnaire.questionnaire'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -576,6 +581,58 @@ export interface ApiEnrollmentEnrollment extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+  };
+}
+
+export interface ApiQuestionnaireQuestionnaire extends Schema.CollectionType {
+  collectionName: 'questionnaires';
+  info: {
+    singularName: 'questionnaire';
+    pluralName: 'questionnaires';
+    displayName: 'Questionnaire';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    activity: Attribute.Relation<
+      'api::questionnaire.questionnaire',
+      'oneToOne',
+      'api::activity.activity'
+    >;
+    extensions: Attribute.Component<'form.field', true> &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::questionnaire.questionnaire',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::questionnaire.questionnaire',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::questionnaire.questionnaire',
+      'oneToMany',
+      'api::questionnaire.questionnaire'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -956,6 +1013,7 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::activity.activity': ApiActivityActivity;
       'api::enrollment.enrollment': ApiEnrollmentEnrollment;
+      'api::questionnaire.questionnaire': ApiQuestionnaireQuestionnaire;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::react-icons.iconlibrary': PluginReactIconsIconlibrary;

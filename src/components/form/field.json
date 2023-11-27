@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_form_fields",
+  "info": {
+    "displayName": "Field",
+    "icon": "italic"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["text", "tel", "email", "url"],
+      "default": "text"
+    },
+    "options": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.multiple-text"
+    },
+    "multiple": {
+      "type": "boolean",
+      "default": false
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
