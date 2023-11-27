@@ -67,11 +67,13 @@
     },
     "gender": {
       "type": "enumeration",
-      "enum": [
-        "Female",
-        "Male",
-        "Other"
-      ]
+      "enum": ["Female", "Male", "Other"]
+    },
+    "enrollments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::enrollment.enrollment",
+      "mappedBy": "user"
     }
   }
 }

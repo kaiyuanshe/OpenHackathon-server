@@ -500,6 +500,17 @@ export interface ApiActivityActivity extends Schema.CollectionType {
           localized: false;
         };
       }>;
+    gitTemplates: Attribute.Component<'common.multiple-text', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    enrollments: Attribute.Relation<
+      'api::activity.activity',
+      'oneToMany',
+      'api::enrollment.enrollment'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -521,6 +532,50 @@ export interface ApiActivityActivity extends Schema.CollectionType {
       'api::activity.activity'
     >;
     locale: Attribute.String;
+  };
+}
+
+export interface ApiEnrollmentEnrollment extends Schema.CollectionType {
+  collectionName: 'enrollments';
+  info: {
+    singularName: 'enrollment';
+    pluralName: 'enrollments';
+    displayName: 'Enrollment';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    activity: Attribute.Relation<
+      'api::enrollment.enrollment',
+      'manyToOne',
+      'api::activity.activity'
+    >;
+    user: Attribute.Relation<
+      'api::enrollment.enrollment',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    status: Attribute.Enumeration<
+      ['none', 'pendingApproval', 'approved', 'rejected']
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'none'>;
+    extensions: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::enrollment.enrollment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::enrollment.enrollment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
   };
 }
 
@@ -867,6 +922,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.role'
     >;
     gender: Attribute.Enumeration<['Female', 'Male', 'Other']>;
+    enrollments: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::enrollment.enrollment'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -895,6 +955,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::activity.activity': ApiActivityActivity;
+      'api::enrollment.enrollment': ApiEnrollmentEnrollment;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::react-icons.iconlibrary': PluginReactIconsIconlibrary;
