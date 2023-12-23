@@ -1,4 +1,7 @@
 export default ({ env }) => [
+  'strapi::logger',
+  'strapi::cors',
+  'strapi::body',
   'strapi::errors',
   {
     name: 'strapi::security',
@@ -14,11 +17,8 @@ export default ({ env }) => [
       },
     },
   },
-  'strapi::cors',
   'strapi::poweredBy',
-  'strapi::logger',
   'strapi::query',
-  'strapi::body',
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
