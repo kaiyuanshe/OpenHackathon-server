@@ -8,12 +8,12 @@
   },
   "dependencies": {
     "@ckeditor/strapi-plugin-ckeditor": "^0.0.10",
-    "@strapi/plugin-color-picker": "^4.15.4",
-    "@strapi/plugin-documentation": "4.15.4",
-    "@strapi/plugin-i18n": "4.15.4",
-    "@strapi/plugin-users-permissions": "4.15.4",
-    "@strapi/strapi": "4.15.4",
-    "better-sqlite3": "9.1.1",
+    "@strapi/plugin-color-picker": "4.16.2",
+    "@strapi/plugin-documentation": "4.16.2",
+    "@strapi/plugin-i18n": "4.16.2",
+    "@strapi/plugin-users-permissions": "4.16.2",
+    "@strapi/strapi": "4.16.2",
+    "better-sqlite3": "9.2.2",
     "pg": "^8.11.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -33,8 +33,8 @@
     "cross-env": "^7.0.3",
     "get-git-folder": "^0.1.2",
     "husky": "^8.0.3",
-    "lint-staged": "^15.1.0",
-    "prettier": "^3.1.0"
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1"
   },
   "prettier": {
     "singleQuote": true
@@ -48,10 +48,11 @@
     "test": "lint-staged",
     "strapi": "strapi",
     "clean": "rm -rf .cache/ .strapi/ dist/",
-    "develop": "npm run clean  &&  strapi ts:generate-types  &&  strapi build  &&  strapi develop",
+    "develop": "strapi develop",
     "build": "npm run clean  &&  cross-env NODE_ENV=production  strapi build",
     "start": "cross-env NODE_ENV=production  strapi start",
-    "pack-image": "docker build -t ohp/strapi-server:latest .",
-    "container": "docker rm -f strapi-server  &&  docker run --name strapi-server -p 1337:1337 -d ohp/strapi-server:latest"
+    "pack-image": "docker build -t ohp/strapi-server .",
+    "database": "docker rm -f postgres-server  &&  docker run --name postgres-server -v ./.data:/var/lib/postgresql/data/ -e POSTGRES_PASSWORD=tobemodified -p 5432:5432 -d postgres",
+    "container": "docker rm -f strapi-server  &&  docker run --name strapi-server -p 1337:1337 -d ohp/strapi-server"
   }
 }
