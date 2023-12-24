@@ -1,6 +1,6 @@
 {
   "name": "@ohp/web-server",
-  "version": "0.10.0",
+  "version": "0.14.0",
   "private": true,
   "engines": {
     "node": ">=18.0.0 <=20.x.x",
@@ -20,7 +20,7 @@
     "react-router-dom": "^5.3.4",
     "strapi-content-type-explorer": "^0.1.1",
     "strapi-plugin-multi-select": "^1.2.2",
-    "strapi-plugin-react-icons": "^0.2.1",
+    "strapi-plugin-react-icons": "^0.2.2",
     "strapi-plugin-transformer": "^3.1.2",
     "strapi-provider-upload-azure-storage": "^3.3.0",
     "styled-components": "^5.3.11"
