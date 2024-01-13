@@ -40,6 +40,7 @@ Start your Strapi application with autoReload enabled. [Learn more][17]
 ```shell
 npm i pnpm -g
 pnpm i
+cp .env.example .env ## change .env by yourself
 pnpm develop
 ```
 
@@ -48,6 +49,7 @@ pnpm develop
 Start your Strapi application with autoReload disabled. [Learn more][18]
 
 ```shell
+cp .env.example .env ## change .env by yourself
 npm start
 ```
 
@@ -56,6 +58,7 @@ npm start
 Build your admin panel. [Learn more][19]
 
 ```shell
+cp .env.example .env ## change .env by yourself
 pnpm build
 ```
 
@@ -64,6 +67,7 @@ pnpm build
 Build your Docker image locally.
 
 ```shell
+cp .env.example .env ## change .env by yourself
 pnpm pack-image
 ```
 
@@ -72,6 +76,7 @@ pnpm pack-image
 Run your Docker image locally.
 
 ```shell
+cp .env.example .env ## change .env by yourself
 pnpm container
 ```
 
