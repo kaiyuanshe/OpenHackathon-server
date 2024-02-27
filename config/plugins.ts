@@ -15,6 +15,7 @@ export default ({ env }) => {
       config: {
         provider: 'strapi-provider-upload-azure-storage',
         providerOptions: {
+          authType: 'default',
           serviceBaseURL,
           account,
           accountKey: env('AZURE_BLOB_ACCOUNT_KEY'),
